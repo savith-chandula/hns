@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Tutorial Video</title>
+</head>
+<body>
+
+    <h1>Watch the Coding Tutorial</h1>
+    
+    <!-- Video Player -->
+    <video id="tutorialVideo" width="720" controls>
+        <source src="resource/tutorial.mp4" type="video/mp4">
+        Your browser does not support the video element.
+    </video>
+
+    <script>
+        // Get the video element
+        const video = document.getElementById('tutorialVideo');
+
+        // Check if there is a saved progress time
+        const savedTime = localStorage.getItem('videoTime');
+        
+        // If a saved time exists, start the video from that point
+        if (savedTime) {
+            video.currentTime = savedTime;
+        }
+
+        // Listen for the 'pause' event to save the current time in localStorage
+        video.addEventListener('pause', function() {
+            localStorage.setItem('videoTime', video.currentTime);
+        });
+
+        // Optionally, clear saved progress when the video is completed (reset progress)
+        video.addEventListener('ended', function() {
+            localStorage.removeItem('videoTime');
+        });
+    </script>
+
+</body>
+</html>
